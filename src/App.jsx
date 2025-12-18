@@ -6,6 +6,9 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import Observability from './pages/Observability';
+import Cybersecurity from './pages/Cybersecurity';
+import DataEngineering from './pages/DataEngineering';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/observability" element={<Observability />} />
+          <Route path="/cybersecurity" element={<Cybersecurity />} />
+          <Route path="/data-engineering" element={<DataEngineering />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

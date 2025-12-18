@@ -34,8 +34,8 @@ const Contact = () => {
                                         <Box>
                                             <Typography variant="h6" fontWeight={700} gutterBottom>Chat to us</Typography>
                                             <Typography variant="body2" color="text.secondary" gutterBottom>Our friendly team is here to help.</Typography>
-                                            <Typography variant="body1" fontWeight={600} component="a" href="mailto:hello@missionlift.com" sx={{ textDecoration: 'none', color: 'inherit' }}>
-                                                hello@missionlift.com
+                                            <Typography variant="body1" fontWeight={600} component="a" href="mailto:hello@LVVL.com" sx={{ textDecoration: 'none', color: 'inherit' }}>
+                                                hello@LVVL.com
                                             </Typography>
                                         </Box>
                                     </Stack>

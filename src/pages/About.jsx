@@ -12,7 +12,7 @@ const About = () => {
                 <Box sx={{ pt: 15, pb: 10, bgcolor: 'background.paper', textAlign: 'center' }}>
                     <Container maxWidth="md">
                         <Typography variant="h2" fontWeight={700} gutterBottom>
-                            About MissionLift
+                            About LVVL
                         </Typography>
                         <Typography variant="h5" color="text.secondary">
                             We are dedicated to empowering innovators and businesses to reach their full potential through cutting-edge technology and strategic guidance.
@@ -35,7 +35,7 @@ const About = () => {
                                 Our Story
                             </Typography>
                             <Typography paragraph color="text.secondary">
-                                Founded in 2024, MissionLift began with a simple idea: that technology should be a catalyst for growth, not a barrier. We saw too many great ideas get stuck in development hell or fail to scale due to poor infrastructure.
+                                Founded in 2024, LVVL began with a simple idea: that technology should be a catalyst for growth, not a barrier. We saw too many great ideas get stuck in development hell or fail to scale due to poor infrastructure.
                             </Typography>
                             <Typography paragraph color="text.secondary">
                                 Today, we help hundreds of companies worldwide streamline their operations, connect with their communities, and build products that matter.
@@ -51,7 +51,7 @@ const About = () => {
                             Meet the Team
                         </Typography>
                         <Grid container spacing={4}>
-                            {[1, 2, 3, 4].map((member) => (
+                            {[1, 2, 3, 4, 5, 6, 7].map((member) => (
                                 <Grid item xs={12} sm={6} md={3} key={member}>
                                     <Paper elevation={0} sx={{ p: 3, textAlign: 'center', bgcolor: 'transparent' }}>
                                         <Avatar

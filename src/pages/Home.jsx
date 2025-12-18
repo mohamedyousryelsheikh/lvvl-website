@@ -4,7 +4,7 @@ import Hero from '../components/Hero/Hero';
 import Partners from '../components/Partners/Partners';
 import Collaboration from '../components/Collaboration/Collaboration';
 import Features from '../components/Features/Features';
-import Community from '../components/Community/Community';
+import Clients from '../components/Clients/Clients';
 import Footer from '../components/Footer/Footer';
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
                 <Partners />
                 <Collaboration />
                 <Features />
-                <Community />
+                <Clients />
             </Box>
             <Footer />
         </Box>

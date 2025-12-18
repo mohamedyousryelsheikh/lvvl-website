@@ -1,5 +1,6 @@
-import { Container, Grid, Paper, Box, Typography } from '@mui/material';
+import { Container, Grid, Paper, Box, Typography, Button } from '@mui/material';
 import { Visibility, GppGood, Storage } from '@mui/icons-material';
+import { Link } from 'react-router-dom'; // Assuming Link is from react-router-dom for 'to' prop
 import './Features.css';
 
 const Features = () => {
@@ -7,17 +8,20 @@ const Features = () => {
         {
             icon: <Visibility fontSize="large" color="secondary" />,
             title: 'Observability',
-            desc: 'Gain deep, kernel-level visibility across your entire stack. Monitor metrics, logs, and traces in real-time.'
+            desc: 'Gain deep, kernel-level visibility across your entire stack. Monitor metrics, logs, and traces in real-time.',
+            link: '/observability'
         },
         {
             icon: <GppGood fontSize="large" color="secondary" />,
             title: 'Cybersecurity',
-            desc: 'Proactive threat detection and SOC excellence. Secure your infrastructure with correlation rules and data lakes.'
+            desc: 'Proactive threat detection and SOC excellence. Secure your infrastructure with correlation rules and data lakes.',
+            link: '/cybersecurity'
         },
         {
             icon: <Storage fontSize="large" color="secondary" />,
             title: 'Data Engineering',
-            desc: 'Scalable lakehouse architectures. Streamline pipelines and enable semantic search on tiered object storage.'
+            desc: 'Scalable lakehouse architectures. Streamline pipelines and enable semantic search on tiered object storage.',
+            link: '/data-engineering'
         }
     ];
 
@@ -44,24 +48,41 @@ const Features = () => {
                                     transform: 'translateY(-5px)',
                                     boxShadow: 4,
                                     borderColor: 'primary.main'
-                                }
+                                },
+                                display: 'flex',
+                                flexDirection: 'column'
                             }}
                         >
-                            <Box sx={{ mb: 2, p: 2, bgcolor: 'primary.light', width: 'fit-content', borderRadius: 3, opacity: 0.1 }}>
+                            <Box sx={{ mb: 2, p: 2, bgcolor: 'rgba(130, 0, 255, 0.1)', width: 'fit-content', borderRadius: 3 }}>
                                 {feature.icon}
                             </Box>
-                            {/* Hack to show icon color correctly since opacity affects child */}
-                            <Box sx={{ mt: -7, mb: 3, ml: 2 }}>{feature.icon}</Box>
-
                             <Typography variant="h5" fontWeight={700} gutterBottom>
                                 {feature.title}
                             </Typography>
-                            <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7, mb: 2 }}>
+                            <Typography color="text.secondary" paragraph sx={{ flexGrow: 1 }}>
                                 {feature.desc}
                             </Typography>
-                            <Typography variant="body2" fontWeight={600} color="primary" sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                                View details <Box component="span" sx={{ ml: 0.5 }}>→</Box>
-                            </Typography>
+                            {feature.link && (
+                                <Box sx={{ mt: 2 }}>
+                                    <Button
+                                        component={Link}
+                                        to={feature.link}
+                                        color="secondary"
+                                        sx={{
+                                            fontWeight: 700,
+                                            p: 0,
+                                            '&:hover': {
+                                                bgcolor: 'transparent',
+                                                '& .MuiButton-startIcon': { textDecoration: 'none' }, // Just in case
+                                                '& .view-details-text': { textDecoration: 'underline' }
+                                            }
+                                        }}
+                                        endIcon={<span>→</span>}
+                                    >
+                                        <span className="view-details-text">View Details</span>
+                                    </Button>
+                                </Box>
+                            )}
                         </Paper>
                     </Grid>
                 ))}

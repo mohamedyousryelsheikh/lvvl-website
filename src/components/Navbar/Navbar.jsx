@@ -9,15 +9,22 @@ import {
     IconButton,
     Menu,
     MenuItem,
-    Stack
+    Stack,
+    Drawer,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText
 } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Menu as MenuIcon, KeyboardArrowDown, Close as CloseIcon } from '@mui/icons-material';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/lvvl_logo.png';
 import './Navbar.css';
 
 const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElServices, setAnchorElServices] = useState(null);
+    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -27,13 +34,31 @@ const Navbar = () => {
         setAnchorElNav(null);
     };
 
+    const handleOpenServicesMenu = (event) => {
+        setAnchorElServices(event.currentTarget);
+    };
+
+    const handleCloseServicesMenu = () => {
+        setAnchorElServices(null);
+    };
+
+    const handleServiceClick = (path) => {
+        navigate(path);
+        handleCloseServicesMenu();
+        handleCloseNavMenu();
+    };
+
     const pages = [
         { title: 'Home', path: '/' },
         { title: 'About Us', path: '/about' },
-        { title: 'Services', path: '/services' },
-        { title: 'Portfolio', path: '/portfolio' },
-        { title: 'Blog', path: '/blog' },
+        // Services is handled separately
         { title: 'Contact', path: '/contact' }
+    ];
+
+    const services = [
+        { title: 'Observability', path: '/observability' },
+        { title: 'Cybersecurity', path: '/cybersecurity' },
+        { title: 'Data Engineering', path: '/data-engineering' }
     ];
 
     return (
@@ -68,33 +93,67 @@ const Navbar = () => {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
+                        <Drawer
+                            anchor="top"
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
+                            PaperProps={{
+                                sx: { width: '100%', height: '100vh', bgcolor: 'background.default' }
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page.title} onClick={handleCloseNavMenu} component={Link} to={page.path}>
-                                    <Typography textAlign="center">{page.title}</Typography>
-                                </MenuItem>
-                            ))}
-                            <MenuItem>
-                                <Button variant="contained" color="primary" fullWidth component={Link} to="/contact">Get Consultation</Button>
-                            </MenuItem>
-                        </Menu>
+                            <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                                <IconButton onClick={handleCloseNavMenu}>
+                                    <CloseIcon fontSize="large" />
+                                </IconButton>
+                            </Box>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4 }}>
+                                <List sx={{ width: '100%', maxWidth: 360 }}>
+                                    <ListItem disablePadding>
+                                        <ListItemButton component={Link} to="/" onClick={handleCloseNavMenu} sx={{ justifyContent: 'center' }}>
+                                            <ListItemText primary="Home" primaryTypographyProps={{ textAlign: 'center', variant: 'h5', fontWeight: 600 }} />
+                                        </ListItemButton>
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemButton component={Link} to="/about" onClick={handleCloseNavMenu} sx={{ justifyContent: 'center' }}>
+                                            <ListItemText primary="About Us" primaryTypographyProps={{ textAlign: 'center', variant: 'h5', fontWeight: 600 }} />
+                                        </ListItemButton>
+                                    </ListItem>
+
+                                    <ListItem disablePadding sx={{ mt: 2 }}>
+                                        <ListItemButton component={Link} to="/services" onClick={handleCloseNavMenu} sx={{ justifyContent: 'center' }}>
+                                            <ListItemText primary="Services" primaryTypographyProps={{ textAlign: 'center', variant: 'h5', fontWeight: 600, color: 'primary.main' }} />
+                                        </ListItemButton>
+                                    </ListItem>
+                                    {services.map((service) => (
+                                        <ListItem key={service.title} disablePadding>
+                                            <ListItemButton onClick={() => handleServiceClick(service.path)} sx={{ justifyContent: 'center', py: 0.5 }}>
+                                                <ListItemText primary={service.title} primaryTypographyProps={{ textAlign: 'center', variant: 'body1', color: 'text.secondary' }} />
+                                            </ListItemButton>
+                                        </ListItem>
+                                    ))}
+
+                                    <ListItem disablePadding sx={{ mt: 2 }}>
+                                        <ListItemButton component={Link} to="/contact" onClick={handleCloseNavMenu} sx={{ justifyContent: 'center' }}>
+                                            <ListItemText primary="Contact" primaryTypographyProps={{ textAlign: 'center', variant: 'h5', fontWeight: 600 }} />
+                                        </ListItemButton>
+                                    </ListItem>
+
+                                    <ListItem sx={{ mt: 4, justifyContent: 'center' }}>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            size="large"
+                                            component={Link}
+                                            to="/contact"
+                                            onClick={handleCloseNavMenu}
+                                            sx={{ minWidth: 200 }}
+                                        >
+                                            Get Consultation
+                                        </Button>
+                                    </ListItem>
+                                </List>
+                            </Box>
+                        </Drawer>
                     </Box>
 
                     {/* Mobile Logo */}
@@ -119,12 +178,30 @@ const Navbar = () => {
 
                     {/* Desktop Menu */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center', gap: 4 }}>
-                        {pages.map((page) => (
+                        <Button
+                            component={Link}
+                            to="/"
+                            sx={{ my: 2, color: 'text.secondary', fontWeight: 500, '&:hover': { color: 'text.primary', bgcolor: 'transparent' } }}
+                        >
+                            Home
+                        </Button>
+                        <Button
+                            component={Link}
+                            to="/about"
+                            sx={{ my: 2, color: 'text.secondary', fontWeight: 500, '&:hover': { color: 'text.primary', bgcolor: 'transparent' } }}
+                        >
+                            About Us
+                        </Button>
+
+                        {/* Dropdown for Services */}
+                        <Box
+                            onMouseEnter={handleOpenServicesMenu}
+                            onMouseLeave={handleCloseServicesMenu}
+                        >
                             <Button
-                                key={page.title}
-                                onClick={handleCloseNavMenu}
                                 component={Link}
-                                to={page.path}
+                                to="/services"
+                                endIcon={<KeyboardArrowDown />}
                                 sx={{
                                     my: 2,
                                     color: 'text.secondary',
@@ -133,9 +210,53 @@ const Navbar = () => {
                                     '&:hover': { color: 'text.primary', bgcolor: 'transparent' }
                                 }}
                             >
-                                {page.title}
+                                Services
                             </Button>
-                        ))}
+                            <Menu
+                                id="services-menu"
+                                anchorEl={anchorElServices}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                open={Boolean(anchorElServices)}
+                                onClose={handleCloseServicesMenu}
+                                MenuListProps={{
+                                    onMouseLeave: handleCloseServicesMenu,
+                                }}
+                                PaperProps={{
+                                    elevation: 2,
+                                    sx: { mt: -1 } // Pull it up slightly to bridge gap
+                                }}
+                                disableRestoreFocus
+                                disableScrollLock={true}
+                                sx={{ pointerEvents: 'none' }} // Let hover pass through the backdrop area
+                            >
+                                <Box sx={{ pointerEvents: 'auto' }}>
+                                    {services.map((service) => (
+                                        <MenuItem
+                                            key={service.title}
+                                            onClick={() => handleServiceClick(service.path)}
+                                            sx={{ minWidth: 150 }}
+                                        >
+                                            {service.title}
+                                        </MenuItem>
+                                    ))}
+                                </Box>
+                            </Menu>
+                        </Box>
+
+                        <Button
+                            component={Link}
+                            to="/contact"
+                            sx={{ my: 2, color: 'text.secondary', fontWeight: 500, '&:hover': { color: 'text.primary', bgcolor: 'transparent' } }}
+                        >
+                            Contact
+                        </Button>
                     </Box>
 
                     {/* Desktop Action */}
