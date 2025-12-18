@@ -1,0 +1,13 @@
+.feature-card {
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #F8FAFC !important; /* Slate 50 */
+  border-radius: 16px !important;
+  transition: transform 0.2s ease-in-out;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}

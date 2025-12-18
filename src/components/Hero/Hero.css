@@ -1,0 +1,19 @@
+.hero-section {
+  position: relative;
+  background: white;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 80vh;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 200, 150, 0.4) 0%, rgba(255, 150, 200, 0.3) 30%, rgba(255, 255, 255, 0) 70%);
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(60px);
+}
