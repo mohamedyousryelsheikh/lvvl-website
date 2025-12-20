@@ -52,18 +52,47 @@ const DataEngineering = () => {
                     </Typography>
                     <Grid container spacing={4}>
                         {[
-                            { title: 'High-Throughput Ingestion', desc: 'High-throughput data ingestion and routing', icon: <Speed fontSize="large" color="secondary" /> },
-                            { title: 'Vendor-Neutral Architecture', desc: 'Vendor-neutral pipeline architecture', icon: <Hub fontSize="large" color="secondary" /> },
-                            { title: 'Data Enrichment', desc: 'Data filtering, masking, and enrichment', icon: <FilterAlt fontSize="large" color="secondary" /> },
-                            { title: 'Tiered Storage', desc: 'Tiered storage and lakehouse design', icon: <Layers fontSize="large" color="secondary" /> },
-                            { title: 'Real-time & Batch', desc: 'Real-time and batch data processing', icon: <Storage fontSize="large" color="secondary" /> },
-                            { title: 'Semantic Search', desc: 'Semantic search–ready data structures', icon: <Search fontSize="large" color="secondary" /> },
+                            { title: 'High-Throughput Ingestion', desc: 'High-throughput data ingestion and routing', icon: <Speed fontSize="large" sx={{ color: '#3b82f6' }} /> },
+                            { title: 'Vendor-Neutral Architecture', desc: 'Vendor-neutral pipeline architecture', icon: <Hub fontSize="large" sx={{ color: '#3b82f6' }} /> },
+                            { title: 'Data Enrichment', desc: 'Data filtering, masking, and enrichment', icon: <FilterAlt fontSize="large" sx={{ color: '#3b82f6' }} /> },
+                            { title: 'Tiered Storage', desc: 'Tiered storage and lakehouse design', icon: <Layers fontSize="large" sx={{ color: '#3b82f6' }} /> },
+                            { title: 'Real-time & Batch', desc: 'Real-time and batch data processing', icon: <Storage fontSize="large" sx={{ color: '#3b82f6' }} /> },
+                            { title: 'Semantic Search', desc: 'Semantic search–ready data structures', icon: <Search fontSize="large" sx={{ color: '#3b82f6' }} /> },
                         ].map((item, index) => (
                             <Grid item xs={12} sm={6} md={4} key={index}>
-                                <Paper elevation={0} sx={{ p: 4, height: '100%', border: '1px solid', borderColor: 'divider', borderRadius: 4 }}>
-                                    <Box sx={{ mb: 2 }}>{item.icon}</Box>
-                                    <Typography variant="h6" fontWeight={700} gutterBottom>{item.title}</Typography>
-                                    <Typography variant="body2" color="text.secondary">{item.desc}</Typography>
+                                <Paper
+                                    elevation={0}
+                                    sx={{
+                                        p: 4,
+                                        height: '100%',
+                                        background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)',
+                                        border: '1px solid',
+                                        borderColor: 'rgba(226, 232, 240, 0.8)',
+                                        borderRadius: 5,
+                                        transition: 'all 0.3s ease',
+                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+                                        '&:hover': {
+                                            transform: 'translateY(-5px)',
+                                            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                                            borderColor: '#3b82f6'
+                                        }
+                                    }}
+                                >
+                                    <Box sx={{
+                                        mb: 3,
+                                        p: 2,
+                                        background: 'linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(59,130,246,0.2) 100%)',
+                                        width: 64,
+                                        height: 64,
+                                        borderRadius: 3,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        {item.icon}
+                                    </Box>
+                                    <Typography variant="h5" fontWeight={700} gutterBottom sx={{ color: '#0f172a' }}>{item.title}</Typography>
+                                    <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>{item.desc}</Typography>
                                 </Paper>
                             </Grid>
                         ))}

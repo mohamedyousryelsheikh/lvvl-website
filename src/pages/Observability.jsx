@@ -52,18 +52,47 @@ const Observability = () => {
                     </Typography>
                     <Grid container spacing={4}>
                         {[
-                            { title: 'Unified Correlation', desc: 'Unified metrics, logs, and traces correlation', icon: <AccountTree fontSize="large" color="secondary" /> },
-                            { title: 'High-Volume Ingestion', desc: 'High-volume telemetry ingestion at scale', icon: <Storage fontSize="large" color="secondary" /> },
-                            { title: 'Real-time Detection', desc: 'Real-time anomaly detection and alerting', icon: <Speed fontSize="large" color="secondary" /> },
-                            { title: 'SLO Tracking', desc: 'SLO and error budget tracking', icon: <TrendingUp fontSize="large" color="secondary" /> },
-                            { title: 'Root-Cause Analysis', desc: 'Root-cause analysis with contextual enrichment', icon: <Visibility fontSize="large" color="secondary" /> },
-                            { title: 'Cost-Aware Pipelines', desc: 'Cost-aware observability pipelines', icon: <Memory fontSize="large" color="secondary" /> },
+                            { title: 'Unified Correlation', desc: 'Unified metrics, logs, and traces correlation', icon: <AccountTree fontSize="large" sx={{ color: '#06b6d4' }} /> },
+                            { title: 'High-Volume Ingestion', desc: 'High-volume telemetry ingestion at scale', icon: <Storage fontSize="large" sx={{ color: '#06b6d4' }} /> },
+                            { title: 'Real-time Detection', desc: 'Real-time anomaly detection and alerting', icon: <Speed fontSize="large" sx={{ color: '#06b6d4' }} /> },
+                            { title: 'SLO Tracking', desc: 'SLO and error budget tracking', icon: <TrendingUp fontSize="large" sx={{ color: '#06b6d4' }} /> },
+                            { title: 'Root-Cause Analysis', desc: 'Root-cause analysis with contextual enrichment', icon: <Visibility fontSize="large" sx={{ color: '#06b6d4' }} /> },
+                            { title: 'Cost-Aware Pipelines', desc: 'Cost-aware observability pipelines', icon: <Memory fontSize="large" sx={{ color: '#06b6d4' }} /> },
                         ].map((item, index) => (
                             <Grid item xs={12} sm={6} md={4} key={index}>
-                                <Paper elevation={0} sx={{ p: 4, height: '100%', border: '1px solid', borderColor: 'divider', borderRadius: 4 }}>
-                                    <Box sx={{ mb: 2 }}>{item.icon}</Box>
-                                    <Typography variant="h6" fontWeight={700} gutterBottom>{item.title}</Typography>
-                                    <Typography variant="body2" color="text.secondary">{item.desc}</Typography>
+                                <Paper
+                                    elevation={0}
+                                    sx={{
+                                        p: 4,
+                                        height: '100%',
+                                        background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)',
+                                        border: '1px solid',
+                                        borderColor: 'rgba(226, 232, 240, 0.8)',
+                                        borderRadius: 5,
+                                        transition: 'all 0.3s ease',
+                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+                                        '&:hover': {
+                                            transform: 'translateY(-5px)',
+                                            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                                            borderColor: '#06b6d4'
+                                        }
+                                    }}
+                                >
+                                    <Box sx={{
+                                        mb: 3,
+                                        p: 2,
+                                        background: 'linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(6,182,212,0.2) 100%)',
+                                        width: 64,
+                                        height: 64,
+                                        borderRadius: 3,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        {item.icon}
+                                    </Box>
+                                    <Typography variant="h5" fontWeight={700} gutterBottom sx={{ color: '#0f172a' }}>{item.title}</Typography>
+                                    <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>{item.desc}</Typography>
                                 </Paper>
                             </Grid>
                         ))}

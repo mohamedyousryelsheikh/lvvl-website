@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     AppBar,
     Toolbar,
@@ -17,7 +17,7 @@ import {
     ListItemText
 } from '@mui/material';
 import { Menu as MenuIcon, KeyboardArrowDown, Close as CloseIcon } from '@mui/icons-material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../assets/lvvl_logo.png';
 import './Navbar.css';
 
@@ -25,6 +25,16 @@ const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElServices, setAnchorElServices] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Determine current processing mode based on path
+    const isHomePage = location.pathname === '/';
+
+    // Styles for navbar elements based on location
+    const navTextColor = isHomePage ? 'rgba(255,255,255,0.7)' : 'text.primary';
+    const navHoverColor = isHomePage ? '#ffffff' : 'primary.main';
+    const logoFilter = isHomePage ? 'brightness(0) invert(1)' : 'none';
+    const mobileIconColor = isHomePage ? 'white' : 'inherit';
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -76,7 +86,7 @@ const Navbar = () => {
                                 component="img"
                                 src={logo}
                                 alt="LVVL Logo"
-                                sx={{ height: 35, width: 'auto' }}
+                                sx={{ height: 35, width: 'auto', filter: logoFilter }}
                             />
                         </Box>
                     </Box>
@@ -90,6 +100,7 @@ const Navbar = () => {
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
                             color="inherit"
+                            sx={{ color: mobileIconColor }}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -172,7 +183,7 @@ const Navbar = () => {
                             component="img"
                             src={logo}
                             alt="LVVL Logo"
-                            sx={{ height: 40, width: 'auto' }}
+                            sx={{ height: 40, width: 'auto', filter: logoFilter }}
                         />
                     </Box>
 
@@ -181,14 +192,14 @@ const Navbar = () => {
                         <Button
                             component={Link}
                             to="/"
-                            sx={{ my: 2, color: 'text.secondary', fontWeight: 500, '&:hover': { color: 'text.primary', bgcolor: 'transparent' } }}
+                            sx={{ my: 2, color: navTextColor, fontWeight: 500, '&:hover': { color: navHoverColor, bgcolor: 'transparent' } }}
                         >
                             Home
                         </Button>
                         <Button
                             component={Link}
                             to="/about"
-                            sx={{ my: 2, color: 'text.secondary', fontWeight: 500, '&:hover': { color: 'text.primary', bgcolor: 'transparent' } }}
+                            sx={{ my: 2, color: navTextColor, fontWeight: 500, '&:hover': { color: navHoverColor, bgcolor: 'transparent' } }}
                         >
                             About Us
                         </Button>
@@ -204,10 +215,10 @@ const Navbar = () => {
                                 endIcon={<KeyboardArrowDown />}
                                 sx={{
                                     my: 2,
-                                    color: 'text.secondary',
+                                    color: navTextColor,
                                     fontSize: '0.95rem',
                                     fontWeight: 500,
-                                    '&:hover': { color: 'text.primary', bgcolor: 'transparent' }
+                                    '&:hover': { color: navHoverColor, bgcolor: 'transparent' }
                                 }}
                             >
                                 Services
@@ -253,7 +264,7 @@ const Navbar = () => {
                         <Button
                             component={Link}
                             to="/contact"
-                            sx={{ my: 2, color: 'text.secondary', fontWeight: 500, '&:hover': { color: 'text.primary', bgcolor: 'transparent' } }}
+                            sx={{ my: 2, color: navTextColor, fontWeight: 500, '&:hover': { color: navHoverColor, bgcolor: 'transparent' } }}
                         >
                             Contact
                         </Button>

@@ -10,61 +10,30 @@ const Clients = () => {
         { name: 'QIIB', logo: qiibLogo },
         { name: 'Almoayyed', logo: almoayyedLogo },
         { name: 'e&', logo: eLogo },
-        // Duplicating for demo purposes to fill the grid as per design feel, 
-        // but realistically we only have 4 unique ones. 
-        // I will display just the 4 centered for now to be authentic.
     ];
 
     return (
         <Box sx={{ py: 15, bgcolor: '#ffffff', position: 'relative', overflow: 'hidden' }}>
-            {/* Dotted Pattern Background - Top Left */}
-            <Box sx={{
-                position: 'absolute',
-                top: 20,
-                left: 20,
-                width: 200,
-                height: 200,
-                backgroundImage: 'radial-gradient(#e2e8f0 2px, transparent 2px)',
-                backgroundSize: '20px 20px',
-                opacity: 0.6,
-                zIndex: 0
-            }} />
-
-            {/* Dotted Pattern Background - Bottom Right */}
-            <Box sx={{
-                position: 'absolute',
-                bottom: 20,
-                right: 20,
-                width: 200,
-                height: 200,
-                backgroundImage: 'radial-gradient(#e2e8f0 2px, transparent 2px)',
-                backgroundSize: '20px 20px',
-                opacity: 0.6,
-                zIndex: 0
-            }} />
-
             <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
                 <Box sx={{ textAlign: 'center', mb: 8 }}>
                     <Typography
                         variant="overline"
                         sx={{
-                            color: '#8200ff', // Teal/Greenish color from design
-                            fontWeight: 800,
+                            color: '#a855f7', // Purple
+                            fontWeight: 700,
                             letterSpacing: 2,
-                            fontSize: '0.8rem'
+                            fontSize: '0.9rem',
+                            display: 'block',
+                            mb: 1
                         }}
                     >
-                        CLIENTS / PARTNERS
+                        CUSTOMER - TESTIMONIALS
                     </Typography>
                     <Typography
                         variant="h3"
                         fontWeight={800}
                         sx={{
-                            mt: 2,
-                            mb: 2,
-                            background: 'linear-gradient(to right, #1e293b, #334155)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
+                            color: '#0f172a',
                             maxWidth: '800px',
                             mx: 'auto'
                         }}
@@ -73,26 +42,24 @@ const Clients = () => {
                     </Typography>
                 </Box>
 
-                <Grid container spacing={3} justifyContent="center">
+                <Grid container spacing={3} justifyContent="center" alignItems="center">
                     {clients.map((client, index) => (
                         <Grid item xs={6} sm={4} md={3} key={index}>
                             <Paper
                                 elevation={0}
                                 sx={{
                                     p: 3,
-                                    height: 120,
+                                    height: 100,
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    border: '1px solid',
-                                    borderColor: 'grey.200',
-                                    borderRadius: 4,
+                                    bgcolor: '#F8FAFC', // Very light gray from image
+                                    borderRadius: 3,
                                     transition: 'all 0.3s ease',
                                     cursor: 'pointer',
                                     '&:hover': {
-                                        transform: 'translateY(-5px)',
-                                        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.1)',
-                                        borderColor: 'transparent'
+                                        bgcolor: '#F1F5F9',
+                                        transform: 'translateY(-3px)'
                                     }
                                 }}
                             >
@@ -104,8 +71,8 @@ const Clients = () => {
                                         maxHeight: '100%',
                                         maxWidth: '80%',
                                         objectFit: 'contain',
-                                        filter: 'grayscale(100%)', // Optional: Start grayscale like modern SaaS sites
-                                        opacity: 0.7,
+                                        filter: 'grayscale(100%)',
+                                        opacity: 0.6,
                                         transition: 'all 0.3s',
                                         '&:hover': {
                                             filter: 'none',
@@ -116,9 +83,32 @@ const Clients = () => {
                             </Paper>
                         </Grid>
                     ))}
-
-
                 </Grid>
+
+                <Box sx={{ mt: 8, textAlign: 'center' }}>
+                    <Box
+                        component="a"
+                        href="/customers"
+                        sx={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            px: 4,
+                            py: 1.5,
+                            borderRadius: '50px',
+                            border: '1px solid #E2E8F0',
+                            color: '#06b6d4', // Cyan text
+                            fontWeight: 700,
+                            textDecoration: 'none',
+                            transition: 'all 0.3s',
+                            '&:hover': {
+                                bgcolor: 'rgba(6, 182, 212, 0.05)',
+                                borderColor: '#06b6d4'
+                            }
+                        }}
+                    >
+                        View Case Studies <Box component="span" sx={{ ml: 1 }}>&rarr;</Box>
+                    </Box>
+                </Box>
             </Container>
         </Box>
     );
