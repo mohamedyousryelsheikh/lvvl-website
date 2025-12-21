@@ -63,7 +63,8 @@ const Footer = () => {
                             links: [
                                 { name: 'Observability', path: '/observability' },
                                 { name: 'Cybersecurity', path: '/cybersecurity' },
-                                { name: 'Data Engineering', path: '/data-engineering' }
+                                { name: 'Data Engineering', path: '/data-engineering' },
+                                { name: 'AI Agent', path: '/product/ai-agent' }
                             ]
                         },
                         /*  {

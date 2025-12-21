@@ -1,4 +1,5 @@
 import { Box, Container, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
@@ -162,10 +163,8 @@ const Hero = () => {
 
                 <Box component={motion.div} variants={itemVariants}>
                     <Button
-                        component={motion.a}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        href="/services"
+                        component={Link}
+                        to="/services"
                         variant="contained"
                         size="large"
                         sx={{

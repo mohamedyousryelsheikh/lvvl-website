@@ -11,11 +11,14 @@ import Cybersecurity from './pages/Cybersecurity';
 import DataEngineering from './pages/DataEngineering';
 import AIAgentProduct from './pages/AIAgentProduct';
 
+import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton';
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
+        <ScrollToTopButton />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
