@@ -21,20 +21,22 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../assets/lvvl_logo.png';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ mode }) => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElServices, setAnchorElServices] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Determine current processing mode based on path
-    const isHomePage = location.pathname === '/';
+    // Determine current processing mode based on path or prop
+    // 'light' mode = White text (for dark backgrounds like Home/AI Agent)
+    // 'dark' mode = Dark text (for light backgrounds)
+    const effectiveMode = mode || (location.pathname === '/' ? 'light' : 'dark');
 
-    // Styles for navbar elements based on location
-    const navTextColor = isHomePage ? 'rgba(255,255,255,0.7)' : 'text.primary';
-    const navHoverColor = isHomePage ? '#ffffff' : 'primary.main';
-    const logoFilter = isHomePage ? 'brightness(0) invert(1)' : 'none';
-    const mobileIconColor = isHomePage ? 'white' : 'inherit';
+    // Styles for navbar elements based on mode
+    const navTextColor = effectiveMode === 'light' ? 'rgba(255,255,255,0.7)' : 'text.primary';
+    const navHoverColor = effectiveMode === 'light' ? '#ffffff' : 'primary.main';
+    const logoFilter = effectiveMode === 'light' ? 'brightness(0) invert(1)' : 'none';
+    const mobileIconColor = effectiveMode === 'light' ? 'white' : 'inherit';
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -70,6 +72,10 @@ const Navbar = () => {
         { title: 'Cybersecurity', path: '/cybersecurity' },
         { title: 'Data Engineering', path: '/data-engineering' }
     ];
+
+    const navButtonSx = effectiveMode === 'light'
+        ? { px: 3, bgcolor: 'white', color: 'black', '&:hover': { bgcolor: 'grey.100' } }
+        : { px: 3 };
 
     return (
         <AppBar position="absolute" color="transparent" elevation={0} className="navbar">
@@ -146,6 +152,12 @@ const Navbar = () => {
                                     <ListItem disablePadding sx={{ mt: 2 }}>
                                         <ListItemButton component={Link} to="/contact" onClick={handleCloseNavMenu} sx={{ justifyContent: 'center' }}>
                                             <ListItemText primary="Contact" primaryTypographyProps={{ textAlign: 'center', variant: 'h5', fontWeight: 600 }} />
+                                        </ListItemButton>
+                                    </ListItem>
+
+                                    <ListItem disablePadding sx={{ mt: 2 }}>
+                                        <ListItemButton component={Link} to="/product/ai-agent" onClick={handleCloseNavMenu} sx={{ justifyContent: 'center' }}>
+                                            <ListItemText primary="AI Agent" primaryTypographyProps={{ textAlign: 'center', variant: 'h5', fontWeight: 600, color: 'secondary.main' }} />
                                         </ListItemButton>
                                     </ListItem>
 
@@ -263,6 +275,14 @@ const Navbar = () => {
 
                         <Button
                             component={Link}
+                            to="/product/ai-agent"
+                            sx={{ my: 2, color: navTextColor, fontWeight: 500, '&:hover': { color: navHoverColor, bgcolor: 'transparent' } }}
+                        >
+                            AI Agent
+                        </Button>
+
+                        <Button
+                            component={Link}
                             to="/contact"
                             sx={{ my: 2, color: navTextColor, fontWeight: 500, '&:hover': { color: navHoverColor, bgcolor: 'transparent' } }}
                         >
@@ -272,7 +292,7 @@ const Navbar = () => {
 
                     {/* Desktop Action */}
                     <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
-                        <Button variant="contained" color="primary" sx={{ px: 3 }} component={Link} to="/contact">
+                        <Button variant="contained" color="primary" sx={navButtonSx} component={Link} to="/contact">
                             Get Consultation
                         </Button>
                     </Box>

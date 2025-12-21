@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import Observability from './pages/Observability';
 import Cybersecurity from './pages/Cybersecurity';
 import DataEngineering from './pages/DataEngineering';
+import AIAgentProduct from './pages/AIAgentProduct';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/observability" element={<Observability />} />
           <Route path="/cybersecurity" element={<Cybersecurity />} />
           <Route path="/data-engineering" element={<DataEngineering />} />
+          <Route path="/product/ai-agent" element={<AIAgentProduct />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

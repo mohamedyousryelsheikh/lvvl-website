@@ -39,7 +39,7 @@ const Partners = () => {
     };
 
     return (
-        <Container maxWidth="lg" sx={{ py: 2 }}>
+        <Container maxWidth="lg" sx={{ py: 10 }}>
             <Grid
                 container
                 spacing={4}

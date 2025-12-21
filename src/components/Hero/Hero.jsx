@@ -1,8 +1,12 @@
 import { Box, Container, Typography, Button } from '@mui/material';
-import { motion } from 'framer-motion';
+
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
 
 const Hero = () => {
+    const { scrollY } = useScroll();
+    const backgroundBoxY = useTransform(scrollY, [0, 1000], [0, 200]); // Reduced range for stability
+
     // Animation variants
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -30,12 +34,12 @@ const Hero = () => {
     const backgroundVariants = {
         animate: {
             background: [
-                'radial-gradient(100% 100% at 50% 5%, #0f172a 0%, #7c3aed 20%, #22d3ee 50%, #ffffff 90%)',
-                'radial-gradient(100% 100% at 50% 5%, #0f172a 0%, #7c3aed 20%, #103b7f 60%, #ffffff 90%)',
-                'radial-gradient(100% 100% at 50% 5%, #0f172a 0%, #7c3aed 20%, #22d3ee 50%, #ffffff 90%)'
+                'radial-gradient(100% 100% at 50% -15%, #0f172a 0%, #7c3aed 20%, #22d3ee 50%, #ffffff 90%)',
+                'radial-gradient(100% 100% at 50% -15%, #0f172a 0%, #4f41cdff 20%, #103b7f 60%, #ffffff 90%)',
+                'radial-gradient(100% 100% at 50% -15%, #0f172a 0%, #7c3aed 20%, #22d3ee 50%, #ffffff 90%)'
             ],
             transition: {
-                duration: 4,
+                duration: 6,
                 repeat: Infinity,
                 ease: "easeInOut"
             }
@@ -43,7 +47,7 @@ const Hero = () => {
     };
 
     // AI Particle Configuration
-    const particleCount = 20;
+    const particleCount = 30;
     const particles = Array.from({ length: particleCount }).map((_, i) => ({
         id: i,
         top: `${Math.random() * 100}%`,
@@ -72,13 +76,15 @@ const Hero = () => {
                 component={motion.div}
                 variants={backgroundVariants}
                 animate="animate"
+                style={{ y: backgroundBoxY }} // Apply parallax here
                 sx={{
                     position: 'absolute',
-                    top: 0,
+                    top: '-10%', // Start higher
                     left: 0,
                     width: '100%',
-                    height: '100%',
-                    zIndex: 0
+                    height: '120%', // Taller to cover parallax movement
+                    zIndex: 0,
+                    willChange: 'transform' // Optimize rendering
                 }}
             />
 

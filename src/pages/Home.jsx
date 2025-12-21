@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import Navbar from '../components/Navbar/Navbar';
 import Hero from '../components/Hero/Hero';
 import Partners from '../components/Partners/Partners';
+import AIAgentPreview from '../components/AIAgentPreview/AIAgentPreview';
 import Collaboration from '../components/Collaboration/Collaboration';
 import Features from '../components/Features/Features';
 import Clients from '../components/Clients/Clients';
@@ -14,6 +15,7 @@ const Home = () => {
             <Box component="main">
                 <Hero />
                 <Partners />
+                <AIAgentPreview />
                 <Collaboration />
                 <Features />
                 <Clients />
