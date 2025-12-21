@@ -1,4 +1,5 @@
 import { Container, Grid, Paper, Box, Typography, Button } from '@mui/material';
+import { motion } from 'framer-motion';
 import { Visibility, GppGood, Storage } from '@mui/icons-material';
 import { Link } from 'react-router-dom'; // Assuming Link is from react-router-dom for 'to' prop
 import './Features.css';
@@ -31,18 +32,62 @@ const Features = () => {
         }
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                type: "spring",
+                stiffness: 50,
+                damping: 20
+            }
+        }
+    };
+
     return (
         <Container maxWidth="lg" sx={{ py: 15 }}>
-            <Box sx={{ textAlign: 'center', mb: 8 }}>
+            <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                sx={{ textAlign: 'center', mb: 8 }}
+            >
                 <Typography variant="h3" fontWeight={800} gutterBottom sx={{ color: '#0f172a' }}>
                     Seamless Integration <br /> for Your Infrastructure
                 </Typography>
             </Box>
-            <Grid container spacing={4}>
+            <Grid
+                container
+                spacing={4}
+                component={motion.div}
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+            >
                 {features.map((feature, index) => (
-                    <Grid item xs={12} md={4} key={index}>
+                    <Grid item xs={12} md={4} key={index} component={motion.div} variants={cardVariants}>
                         <Paper
                             elevation={0}
+                            component={motion.div}
+                            whileHover={{
+                                y: -10,
+                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+                            }}
+                            transition={{ type: "spring", stiffness: 300 }}
                             sx={{
                                 p: 4,
                                 height: '100%',
@@ -50,11 +95,10 @@ const Features = () => {
                                 border: '1px solid',
                                 borderColor: 'rgba(226, 232, 240, 0.8)',
                                 borderRadius: 5,
-                                transition: 'all 0.3s ease',
+                                // Remove default transition for transform/shadow to let motion handle it, but keep border color transition
+                                transition: 'border-color 0.3s ease',
                                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
                                 '&:hover': {
-                                    transform: 'translateY(-8px)',
-                                    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
                                     borderColor: feature.btnColor
                                 },
                                 display: 'flex',

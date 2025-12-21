@@ -3,30 +3,81 @@ import { Email, Phone, LocationOn, Send } from '@mui/icons-material';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 
+import { motion } from 'framer-motion';
+
 const Contact = () => {
+    // Animation Variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: "easeOut" }
+        }
+    };
+
+    const fadeUpVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    };
     return (
         <Box sx={{ flexGrow: 1, minHeight: '100vh', bgcolor: 'background.default', color: 'text.primary', display: 'flex', flexDirection: 'column' }}>
             <Navbar />
 
             <Box component="main" sx={{ flexGrow: 1, pt: 15, pb: 10 }}>
                 <Container maxWidth="lg">
-                    <Box sx={{ textAlign: 'center', mb: 8 }}>
-                        <Typography variant="overline" color="secondary.main" fontWeight={700}>
-                            CONTACT US
-                        </Typography>
-                        <Typography variant="h2" fontWeight={800} gutterBottom>
-                            Get in Touch
-                        </Typography>
-                        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '600px', mx: 'auto', fontSize: '1.1rem' }}>
-                            Ready to transform your operations? Our team is here to help you build a more resilient and efficient future.
-                        </Typography>
+                    <Box
+                        component={motion.div}
+                        initial="hidden"
+                        animate="visible"
+                        variants={containerVariants}
+                        sx={{ textAlign: 'center', mb: 8 }}
+                    >
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="overline" color="secondary.main" fontWeight={700}>
+                                CONTACT US
+                            </Typography>
+                        </Box>
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="h2" fontWeight={800} gutterBottom>
+                                Get in Touch
+                            </Typography>
+                        </Box>
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '600px', mx: 'auto', fontSize: '1.1rem' }}>
+                                Ready to transform your operations? Our team is here to help you build a more resilient and efficient future.
+                            </Typography>
+                        </Box>
                     </Box>
 
                     <Grid container spacing={8}>
                         {/* Contact Info */}
                         <Grid item xs={12} md={5}>
-                            <Stack spacing={4}>
-                                <Paper elevation={0} sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider' }}>
+                            <Stack
+                                spacing={4}
+                                component={motion.div}
+                                initial="hidden"
+                                animate="visible"
+                                variants={containerVariants}
+                            >
+                                <Paper
+                                    component={motion.div}
+                                    variants={itemVariants}
+                                    whileHover={{ x: 10 }}
+                                    elevation={0}
+                                    sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider' }}
+                                >
                                     <Stack direction="row" spacing={3} alignItems="flex-start">
                                         <Box sx={{ p: 1.5, bgcolor: 'rgba(130, 0, 255, 0.1)', borderRadius: 2, color: 'secondary.main', display: 'flex' }}>
                                             <Email />
@@ -41,7 +92,13 @@ const Contact = () => {
                                     </Stack>
                                 </Paper>
 
-                                <Paper elevation={0} sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider' }}>
+                                <Paper
+                                    component={motion.div}
+                                    variants={itemVariants}
+                                    whileHover={{ x: 10 }}
+                                    elevation={0}
+                                    sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider' }}
+                                >
                                     <Stack direction="row" spacing={3} alignItems="flex-start">
                                         <Box sx={{ p: 1.5, bgcolor: 'rgba(130, 0, 255, 0.1)', borderRadius: 2, color: 'secondary.main', display: 'flex' }}>
                                             <LocationOn />
@@ -57,7 +114,13 @@ const Contact = () => {
                                     </Stack>
                                 </Paper>
 
-                                <Paper elevation={0} sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider' }}>
+                                <Paper
+                                    component={motion.div}
+                                    variants={itemVariants}
+                                    whileHover={{ x: 10 }}
+                                    elevation={0}
+                                    sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider' }}
+                                >
                                     <Stack direction="row" spacing={3} alignItems="flex-start">
                                         <Box sx={{ p: 1.5, bgcolor: 'rgba(130, 0, 255, 0.1)', borderRadius: 2, color: 'secondary.main', display: 'flex' }}>
                                             <Phone />
@@ -76,7 +139,14 @@ const Contact = () => {
 
                         {/* Contact Form */}
                         <Grid item xs={12} md={7}>
-                            <Paper elevation={0} sx={{ p: 6, borderRadius: 4, border: '1px solid', borderColor: 'divider', height: '100%' }}>
+                            <Paper
+                                component={motion.div}
+                                initial="hidden"
+                                animate="visible"
+                                variants={fadeUpVariants}
+                                elevation={0}
+                                sx={{ p: 6, borderRadius: 4, border: '1px solid', borderColor: 'divider', height: '100%' }}
+                            >
                                 <Grid container spacing={3}>
                                     <Grid item xs={12} sm={6}>
                                         <Typography variant="subtitle2" fontWeight={700} gutterBottom>First name</Typography>
@@ -99,7 +169,12 @@ const Contact = () => {
                                         <TextField fullWidth multiline rows={4} placeholder="Tell us how we can help..." variant="outlined" />
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" size="large" fullWidth endIcon={<Send />}>
+                                        <Button
+                                            variant="contained" size="large" fullWidth endIcon={<Send />}
+                                            component={motion.button}
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
                                             Send Message
                                         </Button>
                                     </Grid>
@@ -113,6 +188,11 @@ const Contact = () => {
                 <Box sx={{ mt: 10 }}>
                     <Container maxWidth="lg">
                         <Paper
+                            component={motion.div}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1 }}
                             elevation={0}
                             sx={{
                                 width: '100%',

@@ -1,4 +1,5 @@
 import { Container, Grid, Typography, Box, Paper } from '@mui/material';
+import { motion } from 'framer-motion';
 import almaraiLogo from '../../assets/clientsLogos/almarai_Logo.png';
 import almoayyedLogo from '../../assets/clientsLogos/almoayyed_logo.jpeg';
 import eLogo from '../../assets/clientsLogos/e&Logo.png';
@@ -12,10 +13,41 @@ const Clients = () => {
         { name: 'e&', logo: eLogo },
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                type: "spring",
+                stiffness: 50,
+                damping: 20
+            }
+        }
+    };
+
     return (
         <Box sx={{ py: 15, bgcolor: '#ffffff', position: 'relative', overflow: 'hidden' }}>
             <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-                <Box sx={{ textAlign: 'center', mb: 8 }}>
+                <Box
+                    component={motion.div}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    sx={{ textAlign: 'center', mb: 8 }}
+                >
                     <Typography
                         variant="overline"
                         sx={{
@@ -42,11 +74,23 @@ const Clients = () => {
                     </Typography>
                 </Box>
 
-                <Grid container spacing={3} justifyContent="center" alignItems="center">
+                <Grid
+                    container
+                    spacing={3}
+                    justifyContent="center"
+                    alignItems="center"
+                    component={motion.div}
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                >
                     {clients.map((client, index) => (
-                        <Grid item xs={6} sm={4} md={3} key={index}>
+                        <Grid item xs={6} sm={4} md={3} key={index} component={motion.div} variants={cardVariants}>
                             <Paper
                                 elevation={0}
+                                component={motion.div}
+                                whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
                                 sx={{
                                     p: 3,
                                     height: 100,
@@ -55,12 +99,8 @@ const Clients = () => {
                                     justifyContent: 'center',
                                     bgcolor: '#F8FAFC', // Very light gray from image
                                     borderRadius: 3,
-                                    transition: 'all 0.3s ease',
-                                    cursor: 'pointer',
-                                    '&:hover': {
-                                        bgcolor: '#F1F5F9',
-                                        transform: 'translateY(-3px)'
-                                    }
+                                    transition: 'all 0.3s ease', // Fallback transition
+                                    cursor: 'pointer'
                                 }}
                             >
                                 <Box
@@ -84,33 +124,6 @@ const Clients = () => {
                         </Grid>
                     ))}
                 </Grid>
-
-                {/*  <Box sx={{ mt: 8, textAlign: 'center' }}>
-                    <Box
-                        component="a"
-                        href="/customers"
-                        sx={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            px: 4,
-                            py: 1.5,
-                            borderRadius: '50px',
-                            border: '1px solid #E2E8F0',
-                            color: '#06b6d4', // Cyan text
-                            fontWeight: 700,
-                            textDecoration: 'none',
-                            transition: 'all 0.3s',
-                            '&:hover': {
-                                bgcolor: 'rgba(6, 182, 212, 0.05)',
-                                borderColor: '#06b6d4'
-                            }
-                        }}
-                    >
-                        View Case Studies <Box component="span" sx={{ ml: 1 }}>&rarr;
-                            
-                        </Box>
-                    </Box>
-                </Box> */}
             </Container>
         </Box>
     );

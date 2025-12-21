@@ -4,7 +4,29 @@ import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
+import { motion } from 'framer-motion';
+
 const Cybersecurity = () => {
+    // Animation Variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: "easeOut" }
+        }
+    };
     return (
         <Box sx={{ flexGrow: 1, minHeight: '100vh', bgcolor: 'background.default', color: 'text.primary', display: 'flex', flexDirection: 'column' }}>
             <Navbar />
@@ -12,34 +34,63 @@ const Cybersecurity = () => {
             {/* Hero Section */}
             <Box sx={{ pt: 20, pb: 15, bgcolor: 'background.paper' }}>
                 <Container maxWidth="lg">
-                    <Typography variant="overline" color="secondary" fontWeight={700}>
-                        CYBERSECURITY
-                    </Typography>
-                    <Typography variant="h1" sx={{ mt: 2, mb: 4, fontSize: { xs: '2.5rem', md: '4rem' }, maxWidth: '900px' }}>
-                        Proactive Cybersecurity Built on Real-Time Intelligence
-                    </Typography>
-                    <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', lineHeight: 1.6 }}>
-                        Detect threats faster, respond smarter, and secure your infrastructure using correlated, data-driven security insights.
-                    </Typography>
+                    <Box
+                        component={motion.div}
+                        initial="hidden"
+                        animate="visible"
+                        variants={containerVariants}
+                    >
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="overline" color="secondary" fontWeight={700}>
+                                CYBERSECURITY
+                            </Typography>
+                        </Box>
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="h1" sx={{ mt: 2, mb: 4, fontSize: { xs: '2.5rem', md: '4rem' }, maxWidth: '900px' }}>
+                                Proactive Cybersecurity Built on Real-Time Intelligence
+                            </Typography>
+                        </Box>
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', lineHeight: 1.6 }}>
+                                Detect threats faster, respond smarter, and secure your infrastructure using correlated, data-driven security insights.
+                            </Typography>
+                        </Box>
+                    </Box>
                 </Container>
             </Box>
 
             {/* Overview Section */}
             <Container maxWidth="lg" sx={{ py: 10 }}>
-                <Grid container spacing={8}>
+                <Grid
+                    container
+                    spacing={8}
+                    component={motion.div}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={containerVariants}
+                >
                     <Grid item xs={12} md={6}>
-                        <Typography variant="h3" fontWeight={700} gutterBottom>
-                            Overview
-                        </Typography>
-                        <Box sx={{ width: 60, height: 6, bgcolor: 'secondary.main', mb: 4, borderRadius: 2 }} />
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="h3" fontWeight={700} gutterBottom>
+                                Overview
+                            </Typography>
+                        </Box>
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Box sx={{ width: 60, height: 6, bgcolor: 'secondary.main', mb: 4, borderRadius: 2 }} />
+                        </Box>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <Typography variant="body1" paragraph fontSize="1.1rem">
-                            LVVL Cybersecurity transforms raw security telemetry into actionable intelligence by combining real-time detection, behavioral analytics, and centralized visibility.
-                        </Typography>
-                        <Typography variant="body1" fontSize="1.1rem">
-                            We help SOC teams move from reactive alerting to proactive threat detection and response, without overwhelming analysts or inflating costs.
-                        </Typography>
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="body1" paragraph fontSize="1.1rem">
+                                LVVL Cybersecurity transforms raw security telemetry into actionable intelligence by combining real-time detection, behavioral analytics, and centralized visibility.
+                            </Typography>
+                        </Box>
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="body1" fontSize="1.1rem">
+                                We help SOC teams move from reactive alerting to proactive threat detection and response, without overwhelming analysts or inflating costs.
+                            </Typography>
+                        </Box>
                     </Grid>
                 </Grid>
             </Container>
@@ -50,7 +101,15 @@ const Cybersecurity = () => {
                     <Typography variant="h3" fontWeight={700} gutterBottom sx={{ textAlign: 'center', mb: 8 }}>
                         Key Capabilities
                     </Typography>
-                    <Grid container spacing={4}>
+                    <Grid
+                        container
+                        spacing={4}
+                        component={motion.div}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={containerVariants}
+                    >
                         {[
                             { title: 'Security Event Correlation', desc: 'Centralized security event ingestion and correlation', icon: <Security fontSize="large" sx={{ color: '#a855f7' }} /> },
                             { title: 'Real-time Detection', desc: 'Real-time threat detection and alerting', icon: <VerifiedUser fontSize="large" sx={{ color: '#a855f7' }} /> },
@@ -59,8 +118,10 @@ const Cybersecurity = () => {
                             { title: 'Zero Trust Foundation', desc: 'Zero Trust–aligned observability foundations', icon: <Cloud fontSize="large" sx={{ color: '#a855f7' }} /> },
                             { title: 'Long-term Retention', desc: 'Long-term security data retention via data lakes', icon: <Memory fontSize="large" sx={{ color: '#a855f7' }} /> },
                         ].map((item, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
+                            <Grid item xs={12} sm={6} md={4} key={index} component={motion.div} variants={itemVariants}>
                                 <Paper
+                                    component={motion.div}
+                                    whileHover={{ y: -10 }}
                                     elevation={0}
                                     sx={{
                                         p: 4,
@@ -69,26 +130,29 @@ const Cybersecurity = () => {
                                         border: '1px solid',
                                         borderColor: 'rgba(226, 232, 240, 0.8)',
                                         borderRadius: 5,
-                                        transition: 'all 0.3s ease',
+                                        transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
                                         boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
                                         '&:hover': {
-                                            transform: 'translateY(-5px)',
                                             boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
                                             borderColor: '#a855f7'
                                         }
                                     }}
                                 >
-                                    <Box sx={{
-                                        mb: 3,
-                                        p: 2,
-                                        background: 'linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(168,85,247,0.2) 100%)',
-                                        width: 64,
-                                        height: 64,
-                                        borderRadius: 3,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}>
+                                    <Box
+                                        component={motion.div}
+                                        whileHover={{ scale: 1.1, rotate: 5 }}
+                                        transition={{ type: "spring", stiffness: 300 }}
+                                        sx={{
+                                            mb: 3,
+                                            p: 2,
+                                            background: 'linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(168,85,247,0.2) 100%)',
+                                            width: 64,
+                                            height: 64,
+                                            borderRadius: 3,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
                                         {item.icon}
                                     </Box>
                                     <Typography variant="h5" fontWeight={700} gutterBottom sx={{ color: '#0f172a' }}>{item.title}</Typography>
@@ -102,8 +166,16 @@ const Cybersecurity = () => {
 
             {/* Typical Use Cases & Business Outcomes */}
             <Container maxWidth="lg" sx={{ py: 10 }}>
-                <Grid container spacing={8}>
-                    <Grid item xs={12} md={6}>
+                <Grid
+                    container
+                    spacing={8}
+                    component={motion.div}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={containerVariants}
+                >
+                    <Grid item xs={12} md={6} component={motion.div} variants={itemVariants}>
                         <Paper elevation={0} sx={{ p: 5, bgcolor: 'grey.50', borderRadius: 4, height: '100%' }}>
                             <Typography variant="h4" fontWeight={700} gutterBottom>
                                 Typical Use Cases
@@ -126,7 +198,7 @@ const Cybersecurity = () => {
                             </List>
                         </Paper>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={6} component={motion.div} variants={itemVariants}>
                         <Paper elevation={0} sx={{ p: 5, bgcolor: 'primary.main', color: 'primary.contrastText', borderRadius: 4, height: '100%' }}>
                             <Typography variant="h4" fontWeight={700} gutterBottom color="inherit">
                                 Business Outcomes

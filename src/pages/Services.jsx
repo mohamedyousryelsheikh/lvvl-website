@@ -7,7 +7,39 @@ import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import Partners from '../components/Partners/Partners';
 
+import { motion } from 'framer-motion';
+
 const Services = () => {
+    // Animation Variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: "easeOut" }
+        }
+    };
+
+    const fadeLeftVariants = {
+        hidden: { opacity: 0, x: -50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    };
+
+    const fadeRightVariants = {
+        hidden: { opacity: 0, x: 50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    };
     return (
         <Box sx={{ flexGrow: 1, minHeight: '100vh', bgcolor: 'background.default', color: 'text.primary' }}>
             <Navbar />
@@ -16,45 +48,97 @@ const Services = () => {
                 {/* Hero / Header Section */}
                 <Box sx={{ pt: 15, pb: 10, bgcolor: 'background.paper', position: 'relative', overflow: 'hidden' }}>
                     <Container maxWidth="lg" sx={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-                        <Typography variant="overline" display="block" color="secondary.main" fontWeight={700} gutterBottom>
-                            OUR SERVICES
-                        </Typography>
-                        <Typography variant="h2" fontWeight={800} gutterBottom sx={{ mb: 3 }}>
-                            Operational Intelligence
-                        </Typography>
-                        <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', mb: 4, lineHeight: 1.6 }}>
-                            Aggregate observability and security telemetry across your infrastructure. Powered by AI/ML to detect anomalies, threats, and performance issues in real time.
-                        </Typography>
-                        <Button variant="contained" size="large">
-                            Get a Constultation
-                        </Button>
+                        <Box
+                            component={motion.div}
+                            initial="hidden"
+                            animate="visible"
+                            variants={containerVariants}
+                        >
+                            <Box component={motion.div} variants={itemVariants}>
+                                <Typography variant="overline" display="block" color="secondary.main" fontWeight={700} gutterBottom>
+                                    OUR SERVICES
+                                </Typography>
+                            </Box>
+                            <Box component={motion.div} variants={itemVariants}>
+                                <Typography variant="h2" fontWeight={800} gutterBottom sx={{ mb: 3 }}>
+                                    Operational Intelligence
+                                </Typography>
+                            </Box>
+                            <Box component={motion.div} variants={itemVariants}>
+                                <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', mb: 4, lineHeight: 1.6 }}>
+                                    Aggregate observability and security telemetry across your infrastructure. Powered by AI/ML to detect anomalies, threats, and performance issues in real time.
+                                </Typography>
+                            </Box>
+                            <Box component={motion.div} variants={itemVariants}>
+                                <Button
+                                    variant="contained"
+                                    size="large"
+                                    component={motion.button}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    Get a Constultation
+                                </Button>
+                            </Box>
+                        </Box>
                     </Container>
 
                     {/* Background decoration */}
-                    <Box sx={{
-                        position: 'absolute',
-                        top: -100,
-                        right: -100,
-                        width: 400,
-                        height: 400,
-                        borderRadius: '50%',
-                        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(255,255,255,0) 70%)',
-                        zIndex: 0
-                    }} />
+                    <Box
+                        component={motion.div}
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            opacity: [0.3, 0.5, 0.3],
+                        }}
+                        transition={{
+                            duration: 10,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        sx={{
+                            position: 'absolute',
+                            top: -100,
+                            right: -100,
+                            width: 400,
+                            height: 400,
+                            borderRadius: '50%',
+                            background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(255,255,255,0) 70%)',
+                            zIndex: 0
+                        }}
+                    />
                 </Box>
 
                 {/* Framework Section */}
                 <Container maxWidth="lg" sx={{ py: 12 }}>
-                    <Box sx={{ textAlign: 'center', mb: 10 }}>
-                        <Typography variant="h3" fontWeight={700} gutterBottom>
-                            Unified Telemetry & Analytics Framework
-                        </Typography>
-                        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '700px', mx: 'auto' }}>
-                            Break down data silos across your entire infrastructure. Gain comprehensive, real-time visibility through unified end-to-end telemetry collection.
-                        </Typography>
+                    <Box
+                        component={motion.div}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={containerVariants}
+                        sx={{ textAlign: 'center', mb: 10 }}
+                    >
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="h3" fontWeight={700} gutterBottom>
+                                Unified Telemetry & Analytics Framework
+                            </Typography>
+                        </Box>
+                        <Box component={motion.div} variants={itemVariants}>
+                            <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '700px', mx: 'auto' }}>
+                                Break down data silos across your entire infrastructure. Gain comprehensive, real-time visibility through unified end-to-end telemetry collection.
+                            </Typography>
+                        </Box>
                     </Box>
 
-                    <Grid container spacing={4}>
+                    <Grid
+                        container
+                        spacing={4}
+                        component={motion.div}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-50px" }}
+                        variants={containerVariants}
+                    >
                         {[
                             {
                                 title: 'Flexible Data Collection',
@@ -72,8 +156,10 @@ const Services = () => {
                                 icon: <Insights fontSize="large" color="secondary" />
                             }
                         ].map((item, index) => (
-                            <Grid item xs={12} md={4} key={index}>
+                            <Grid item xs={12} md={4} key={index} component={motion.div} variants={itemVariants}>
                                 <Paper
+                                    component={motion.div}
+                                    whileHover={{ y: -10, transition: { duration: 0.3 } }}
                                     elevation={0}
                                     sx={{
                                         p: 4,
@@ -81,19 +167,23 @@ const Services = () => {
                                         border: '1px solid',
                                         borderColor: 'divider',
                                         borderRadius: 4,
-                                        transition: 'all 0.3s',
+                                        transition: 'box-shadow 0.3s, border-color 0.3s', // removed transform from here to let framer handle it
                                         '&:hover': {
-                                            transform: 'translateY(-5px)',
                                             boxShadow: 4,
                                             borderColor: 'primary.main'
                                         }
                                     }}
                                 >
-                                    <Box sx={{ mb: 2, p: 2, bgcolor: 'secondary.main', width: 'fit-content', borderRadius: 3, bgOpacity: 0.1, opacity: 0.1 }}>
+                                    <Box
+                                        component={motion.div}
+                                        whileHover={{ scale: 1.1, rotate: 5 }}
+                                        transition={{ type: "spring", stiffness: 300 }}
+                                        sx={{ mb: 2, p: 2, bgcolor: 'secondary.main', width: 'fit-content', borderRadius: 3, bgOpacity: 0.1, opacity: 0.1 }}
+                                    >
                                         {item.icon}
                                     </Box>
                                     {/* Hack to show icon color correctly since opacity affects child */}
-                                    <Box sx={{ mt: -7, mb: 3, ml: 2 }}>{item.icon}</Box>
+                                    <Box sx={{ mt: -7, mb: 3, ml: 2, pointerEvents: 'none' }}>{item.icon}</Box>
 
                                     <Typography variant="h5" fontWeight={700} gutterBottom>
                                         {item.title}
@@ -111,7 +201,14 @@ const Services = () => {
                 <Box sx={{ py: 12, bgcolor: 'background.paper', position: 'relative', overflow: 'hidden' }}>
                     <Container maxWidth="lg">
                         <Grid container spacing={6} alignItems="center">
-                            <Grid item xs={12} md={6}>
+                            <Grid
+                                item xs={12} md={6}
+                                component={motion.div}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-100px" }}
+                                variants={fadeLeftVariants}
+                            >
                                 <Box
                                     sx={{
                                         position: 'relative',
@@ -127,6 +224,11 @@ const Services = () => {
                                         sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                     />
                                     <Box
+                                        component={motion.div}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.5 }}
                                         sx={{
                                             position: 'absolute',
                                             bottom: 20,
@@ -145,7 +247,14 @@ const Services = () => {
                                     </Box>
                                 </Box>
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            <Grid
+                                item xs={12} md={6}
+                                component={motion.div}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-100px" }}
+                                variants={fadeRightVariants}
+                            >
                                 <Typography variant="overline" color="secondary.main" fontWeight={700}>
                                     PARTNERSHIP
                                 </Typography>
@@ -156,8 +265,18 @@ const Services = () => {
                                     As a Certified Splunk Partner, we harness Splunk’s “Data-to-Everything” platform to deliver unified observability and security analytics.
                                 </Typography>
                                 <Stack spacing={2}>
-                                    {['Real-time threat detection', 'Operational intelligence', 'Compliance assurance', 'Optimized performance at scale'].map((item) => (
-                                        <Stack direction="row" alignItems="center" spacing={2} key={item}>
+                                    {['Real-time threat detection', 'Operational intelligence', 'Compliance assurance', 'Optimized performance at scale'].map((item, i) => (
+                                        <Stack
+                                            direction="row"
+                                            alignItems="center"
+                                            spacing={2}
+                                            key={item}
+                                            component={motion.div}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: 0.2 + (i * 0.1) }}
+                                        >
                                             <Security color="secondary" fontSize="small" />
                                             <Typography variant="body1" fontWeight={500}>{item}</Typography>
                                         </Stack>
