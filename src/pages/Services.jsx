@@ -6,6 +6,7 @@ import {
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import Partners from '../components/Partners/Partners';
+import { Link } from 'react-router-dom';
 
 import { motion } from 'framer-motion';
 
@@ -73,7 +74,9 @@ const Services = () => {
                                 <Button
                                     variant="contained"
                                     size="large"
-                                    component={motion.button}
+                                    component={Link}
+                                    to="/contact"
+
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
