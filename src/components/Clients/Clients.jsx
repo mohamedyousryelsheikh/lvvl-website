@@ -85,7 +85,7 @@ const Clients = () => {
                     ))}
                 </Grid>
 
-                <Box sx={{ mt: 8, textAlign: 'center' }}>
+                {/*  <Box sx={{ mt: 8, textAlign: 'center' }}>
                     <Box
                         component="a"
                         href="/customers"
@@ -106,9 +106,11 @@ const Clients = () => {
                             }
                         }}
                     >
-                        View Case Studies <Box component="span" sx={{ ml: 1 }}>&rarr;</Box>
+                        View Case Studies <Box component="span" sx={{ ml: 1 }}>&rarr;
+                            
+                        </Box>
                     </Box>
-                </Box>
+                </Box> */}
             </Container>
         </Box>
     );
