@@ -1,10 +1,11 @@
 import { Box, Container, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
 
 const Hero = () => {
+    const navigate = useNavigate();
     const { scrollY } = useScroll();
     const backgroundBoxY = useTransform(scrollY, [0, 1000], [0, 200]); // Reduced range for stability
 
@@ -163,8 +164,10 @@ const Hero = () => {
 
                 <Box component={motion.div} variants={itemVariants}>
                     <Button
-                        component={Link}
-                        to="/services"
+                        component={motion.button}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => navigate('/services')}
                         variant="contained"
                         size="large"
                         sx={{
