@@ -1,8 +1,10 @@
 {
     "rewrites": [
         {
-            "source": "/(.*)",
+            "source": "/((?!assets/|vite.svg).*)",
             "destination": "/index.html"
         }
-    ]
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
 }
