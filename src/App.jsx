@@ -28,6 +28,9 @@ function App() {
           <Route path="/cybersecurity" element={<Cybersecurity />} />
           <Route path="/data-engineering" element={<DataEngineering />} />
           <Route path="/product/ai-agent" element={<AIAgentProduct />} />
+
+          {/* 🔴 THIS IS THE CRITICAL LINE */}
+          <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
